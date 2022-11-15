@@ -1,0 +1,8 @@
+<div class="header">
+  <app-add-new-parking-meter (created)="addNewParkingMeter($event)"></app-add-new-parking-meter>
+</div>
+<div class="list-container">
+  <ng-container *ngFor="let parkingMeter of parkingMeterList">
+    <app-parking-meter-list-item [parkingMeter]="parkingMeter"></app-parking-meter-list-item>
+  </ng-container>
+</div>

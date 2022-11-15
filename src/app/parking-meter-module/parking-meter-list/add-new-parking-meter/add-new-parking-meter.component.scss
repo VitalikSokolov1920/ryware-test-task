@@ -1,0 +1,17 @@
+.container {
+  width: 300px;
+  display: flex;
+
+  margin: 0 auto;
+
+  flex-direction: column;
+
+  row-gap: 30px;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  column-gap: 30px
+}

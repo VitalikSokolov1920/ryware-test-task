@@ -1,0 +1,11 @@
+<div class="item-container" *ngIf="parkingMeter">
+  <p class="item-container__info item-container__info_centered">
+    ID: {{parkingMeter.id}}
+  </p>
+
+  <p class="item-container__info_address item-container__info">
+    Address: {{parkingMeter.address}}
+  </p>
+
+  <button [routerLink]="['../',parkingMeter.id]" class="btn item-container__footer">Change</button>
+</div>

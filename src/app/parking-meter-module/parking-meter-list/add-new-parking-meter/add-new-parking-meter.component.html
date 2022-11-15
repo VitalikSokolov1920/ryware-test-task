@@ -1,0 +1,25 @@
+<div [formGroup]="formGroup" class="container">
+  <div class="controls">
+    <div class="input-container input-container_labeled">
+      <input placeholder=" " class="input-container__input" formControlName="address">
+      <label class="input-container__label">Address</label>
+    </div>
+    <div class="input-container input-container_labeled">
+      <input type="number" min="0" placeholder=" "
+             class="input-container__input" formControlName="usages">
+
+      <label class="input-container__label">Usages</label>
+    </div>
+  </div>
+
+  <label>
+    Is used
+    <input type="checkbox" formControlName="status">
+  </label>
+
+  <button (click)="createParkingMeter()" class="btn btn_standard">Add</button>
+
+  <div class="error">
+    {{errorMessage}}
+  </div>
+</div>
