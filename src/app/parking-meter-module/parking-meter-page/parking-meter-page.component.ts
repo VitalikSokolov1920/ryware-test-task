@@ -41,7 +41,7 @@ export class ParkingMeterPageComponent implements OnInit {
   }
 
   changeDisabledStatus(): void {
-    this.parkingMeter.disabled = !this.parkingMeter.disabled;
+    this.parkingMeterService.changeDisableStatus(this.parkingMeter);
   }
 
   changeStatus(): void {
