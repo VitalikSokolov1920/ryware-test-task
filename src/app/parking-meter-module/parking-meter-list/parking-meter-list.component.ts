@@ -15,21 +15,27 @@ export class ParkingMeterListComponent implements OnInit {
 
   addNewParkingMeter(parkingMeter: ParkingMeter) {
     this.parkingMeterService.addParkingMeter(parkingMeter);
+
+    this.sortList();
   }
 
   ngOnInit(): void {
     this.parkingMeterService.getParkingMeterList().subscribe(list => {
       this.parkingMeterList = list;
 
-      this.parkingMeterList.sort((a,b) => {
-        if (a.address === b.address) {
-          return 0;
-        } else if (a.address > b.address) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
+      this.sortList();
+    });
+  }
+
+  private sortList() {
+    this.parkingMeterList.sort((a,b) => {
+      if (a.address === b.address) {
+        return 0;
+      } else if (a.address > b.address) {
+        return 1;
+      } else {
+        return -1;
+      }
     });
   }
 

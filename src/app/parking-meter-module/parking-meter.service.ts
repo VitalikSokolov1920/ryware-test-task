@@ -9,7 +9,29 @@ import {ParkingMeter} from "./models/parking-meter";
 export class ParkingMeterService {
   private static olderId = 30;
 
-  constructor() {}
+  constructor() {
+    this.loadData();
+  }
+
+  private loadData() {
+    const parkingList = sessionStorage.getItem('parkingMeterList');
+    const olderId = sessionStorage.getItem('olderId');
+
+    if (parkingList) {
+      this.parkingMeterListMock = JSON.parse(parkingList);
+    }
+
+    if (olderId) {
+      ParkingMeterService.olderId = JSON.parse(olderId);
+    } else {
+      ParkingMeterService.olderId = Math.max(...this.parkingMeterListMock.map(p => p.id));
+    }
+  }
+
+  private saveData() {
+    sessionStorage.setItem('parkingMeterList', JSON.stringify(this.parkingMeterListMock));
+    sessionStorage.setItem('olderId', JSON.stringify(ParkingMeterService.olderId));
+  }
 
   private parkingMeterListMock: ParkingMeter[] = [
     new ParkingMeter(0, "город Москва, ул. Косиора, 78", false, 2),
@@ -53,9 +75,13 @@ export class ParkingMeterService {
   }
 
   addParkingMeter(parkingMeter: ParkingMeter): void {
-    parkingMeter.id = ParkingMeterService.olderId++;
+    parkingMeter.id = ++ParkingMeterService.olderId;
 
     this.parkingMeterListMock.push(parkingMeter);
+
+    console.log(ParkingMeterService.olderId);
+
+    this.saveData();
   }
 
   changeParkingMeterStatus(parkingMeter: ParkingMeter): boolean {
@@ -65,10 +91,14 @@ export class ParkingMeterService {
 
     parkingMeter.status = !parkingMeter.status;
 
+    this.saveData();
+
     return true;
   }
 
   changeDisableStatus(parkingMeter: ParkingMeter) {
     parkingMeter.disabled = !parkingMeter.disabled;
+
+    this.saveData();
   }
 }
